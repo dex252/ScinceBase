@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Web.ViewModels.Home.ReviewViewModel
+
+@{
     ViewBag.Title = "Home";
     ViewBag.IsWebpack = true;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,5 +13,6 @@
 }
 
 <div class="home-container">
-
+    <div>Текущее число классов: @Model.CountOfClasses</div>
+    <div>Текущее число признаков: @Model.CountOfProperties</div>
 </div>

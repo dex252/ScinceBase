@@ -58,7 +58,7 @@ var OdcWeb =
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"homeBundle": 0
+/******/ 		"generatorBundle": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -149,7 +149,7 @@ var OdcWeb =
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([0,"vendor"]);
+/******/ 	deferredModules.push([1,"vendor"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -167,15 +167,27 @@ eval("// extracted by mini-css-extract-plugin\n\n//# sourceURL=webpack://OdcWeb/
 
 /***/ }),
 
-/***/ "./Scripts/Custom/Home/index.js":
-/*!**************************************!*\
-  !*** ./Scripts/Custom/Home/index.js ***!
-  \**************************************/
+/***/ "./Scripts/Custom/Generator/index.js":
+/*!*******************************************!*\
+  !*** ./Scripts/Custom/Generator/index.js ***!
+  \*******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var shared_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! shared/common */ \"./Scripts/Shared/common.js\");\n﻿\r\n\r\n$(() => {\r\n\r\n});\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery-exposed.js\")))\n\n//# sourceURL=webpack://OdcWeb/./Scripts/Custom/Home/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var shared_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! shared/common */ \"./Scripts/Shared/common.js\");\n/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery-mask-plugin */ \"./node_modules/jquery-mask-plugin/dist/jquery.mask.js\");\n/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./validation */ \"./Scripts/Custom/Generator/validation.js\");\n﻿\r\n\r\n\r\n\r\n\r\nconst COUNT_OF_CLASSES = $('#count-of-classes');\r\nconst COUNT_OF_PROPERTIES = $('#count-of-properties');\r\nconst OK_BUTTON = '#generator-button-ok';\r\nconst INPUT_FORM = $('#input-groups');\r\n\r\n$(() => {\r\n    Object(_validation__WEBPACK_IMPORTED_MODULE_2__[\"SetMask\"])(COUNT_OF_CLASSES, \"99\");\r\n    Object(_validation__WEBPACK_IMPORTED_MODULE_2__[\"SetMask\"])(COUNT_OF_PROPERTIES, \"999\");\r\n\r\n    $(document).on('click', OK_BUTTON, async (e) => {\r\n        let valid = INPUT_FORM.valid();\r\n\r\n        if (!valid) {\r\n            return;\r\n        }\r\n    });\r\n\r\n});\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery-exposed.js\")))\n\n//# sourceURL=webpack://OdcWeb/./Scripts/Custom/Generator/index.js?");
+
+/***/ }),
+
+/***/ "./Scripts/Custom/Generator/validation.js":
+/*!************************************************!*\
+  !*** ./Scripts/Custom/Generator/validation.js ***!
+  \************************************************/
+/*! exports provided: SetMask */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SetMask\", function() { return SetMask; });\n/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery-mask-plugin */ \"./node_modules/jquery-mask-plugin/dist/jquery.mask.js\");\n/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);\n﻿\r\n\r\nfunction SetMask(input, mask) {\r\n    input.mask(mask);\r\n}\n\n//# sourceURL=webpack://OdcWeb/./Scripts/Custom/Generator/validation.js?");
 
 /***/ }),
 
@@ -215,14 +227,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* WEBPACK VAR INJECTION */(f
 
 /***/ }),
 
-/***/ 0:
-/*!***********************************************************!*\
-  !*** multi babel-polyfill ./Scripts/Custom/Home/index.js ***!
-  \***********************************************************/
+/***/ 1:
+/*!****************************************************************!*\
+  !*** multi babel-polyfill ./Scripts/Custom/Generator/index.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! babel-polyfill */\"./node_modules/babel-polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! ./Scripts/Custom/Home/index.js */\"./Scripts/Custom/Home/index.js\");\n\n\n//# sourceURL=webpack://OdcWeb/multi_babel-polyfill_./Scripts/Custom/Home/index.js?");
+eval("__webpack_require__(/*! babel-polyfill */\"./node_modules/babel-polyfill/lib/index.js\");\nmodule.exports = __webpack_require__(/*! ./Scripts/Custom/Generator/index.js */\"./Scripts/Custom/Generator/index.js\");\n\n\n//# sourceURL=webpack://OdcWeb/multi_babel-polyfill_./Scripts/Custom/Generator/index.js?");
 
 /***/ })
 
