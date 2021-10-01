@@ -1,26 +1,60 @@
+using Dapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Web.Middlewares;
+using Web.Repositories;
+using Web.Repositories.Connection;
 
 namespace Web
 {
     public class Startup
     {
+        const string SpecificOrigins = "SpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
         }
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllersWithViews();
-            services.AddMvc();
-        }
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: SpecificOrigins,
+                    configurePolice =>
+                    {
+                        configurePolice
+                            .SetIsOriginAllowed(origin => true)
+                            .AllowAnyHeader()
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod();
 
+                    });
+            });
+
+            services.AddControllers().AddJsonOptions(options =>
+                                 options.JsonSerializerOptions.IgnoreNullValues = true);
+
+            services.AddMvc();
+
+            services.AddSingleton<IConnection, MySqlDbConnection>();
+            services.AddScoped<ISmartRepository, SmartRepository>();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    return Interceptor.Get(actionContext);
+                };
+            });
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -34,10 +68,14 @@ namespace Web
                 
                 app.UseHsts();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors(SpecificOrigins);
 
             app.UseAuthorization();
 
