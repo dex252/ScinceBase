@@ -21,6 +21,13 @@ namespace Web
             services.AddMvc();
         }
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = actionContext =>
+                {
+                    return Interceptor.Get(actionContext);
+                };
+            });
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -34,6 +41,7 @@ namespace Web
                 
                 app.UseHsts();
             }
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
