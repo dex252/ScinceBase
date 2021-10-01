@@ -12,11 +12,13 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ILogger<HomeController> Log { get; }
 
         public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> log, ISmartRepository smartRepository)
         {
-            _logger = logger;
+            Log = log;
+            SmartRepository = smartRepository;
         }
 
         public IActionResult Index()
