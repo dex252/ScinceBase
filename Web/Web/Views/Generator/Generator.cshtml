@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Generator";
+    ViewBag.IsWebpack = true;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/bundles/generatorBundle.css" type="text/css" />
+
+@section scripts{
+    <script src="~/bundles/generatorBundle.js"></script>
+}
+
+<div class="generator-container">
+    <form class="flex-column" id="input-groups">
+        <input class="form-control col-6 mb-1"
+               id="count-of-classes"
+               name="count-of-classes"
+               type="text"
+               placeholder="Число классов"
+               data-val="true"
+               data-val-required="Значение не может быть пустым" />
+        <span data-valmsg-for="count-of-classes" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+
+        <input class="form-control col-6"
+               id="count-of-properties"
+               name="count-of-properties"
+               type="text"
+               placeholder="Число признаков"
+               data-val="true"
+               data-val-required="Значение не может быть пустым" />
+        <span data-valmsg-for="count-of-properties" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+    </form>
+    <div class="row pt-1 pr-0 col-6 justify-content-end">
+        <button type="button" 
+                id="generator-button-ok"
+                class="btn btn-outline-primary">Генератор</button>
+    </div>
+</div>

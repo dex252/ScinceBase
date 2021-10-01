@@ -25,6 +25,9 @@ namespace Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages()
+                .AddRazorRuntimeCompilation();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: SpecificOrigins,
