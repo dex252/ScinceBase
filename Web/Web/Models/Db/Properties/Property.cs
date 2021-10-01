@@ -2,14 +2,14 @@
 using Dapper.Contrib.Extensions;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using Web.Models.Db.Properties;
+using Web.Models.Db.Periods;
 using KeyAttribute = Dapper.Contrib.Extensions.KeyAttribute;
 using TableAttribute = Dapper.Contrib.Extensions.TableAttribute;
 
-namespace Web.Models.Db
+namespace Web.Models.Db.Properties
 {
-    [Table("root")]
-    public class Classes
+    [Table("properties")]
+    public class Property: IProperty
     {
         [Key]
         public decimal? Id { get; set; }
@@ -20,19 +20,25 @@ namespace Web.Models.Db
         [Column("name")]
         public string Name { get; set; }
 
-        [Computed]
-        public List<IProperty> Properties { get; set; }
+        [Column("type")]
+        public Enums.ValueType ValueType { get; set; }
 
-        [Column("properties")]
+        [Column("current_period")]
+        public decimal? CurrentPeriod { get; set; }
+
+        [Computed]
+        public List<IPeriod> Periods { get; set; }
+
+        [Column("periods")]
         public string Settings
         {
             get
             {
-                return JsonConvert.SerializeObject(Properties);
+                return JsonConvert.SerializeObject(Periods);
             }
             set
             {
-                Properties = JsonConvert.DeserializeObject<List<IProperty>>(value);
+                Periods = JsonConvert.DeserializeObject<List<IPeriod>>(value);
             }
         }
     }
