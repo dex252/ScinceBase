@@ -1,3 +1,4 @@
+using Dapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,7 @@ namespace Web
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            SimpleCRUD.SetDialect(SimpleCRUD.Dialect.MySQL);
         }
 
         public IConfiguration Configuration { get; }
@@ -20,6 +22,8 @@ namespace Web
             //services.AddControllersWithViews();
             services.AddMvc();
         }
+            services.AddSingleton<IConnection, MySqlDbConnection>();
+            services.AddScoped<ISmartRepository, SmartRepository>();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

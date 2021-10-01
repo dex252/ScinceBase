@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Web.Models;
+using Web.Repositories;
 using Web.ViewModels.Shared.Errors;
 
 namespace Web.Controllers
@@ -14,7 +10,8 @@ namespace Web.Controllers
     {
         private ILogger<HomeController> Log { get; }
 
-        public HomeController(ILogger<HomeController> logger)
+        private ISmartRepository SmartRepository { get; }
+
         public HomeController(ILogger<HomeController> log, ISmartRepository smartRepository)
         {
             Log = log;
@@ -23,6 +20,7 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
+            var reviewModel = SmartRepository.GetReview();
             return View();
         }
 
