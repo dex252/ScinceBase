@@ -1,0 +1,34 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Обзор</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn navigation-page-bar menu-item" asp-area="" asp-controller="Algorithms" asp-action="Index">Редактор</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <div class="d-flex">
+                    <div id="navigation-name" class="align-self-center pr-2"></div>
+                    @{
+                        var button = "undefined";
+#if MOCK
+                                    button = "mock";
+#elif RELEASE
+                                    button = "release";
+#else
+                        button = "debug";
+#endif
+                    }
+                    <button id="navigation-enter-button" class="btn btn-outline-primary my-2 my-sm-0 mx-1" type="button">@button</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</nav>
