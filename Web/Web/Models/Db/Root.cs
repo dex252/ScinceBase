@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Web.Models.Db.Properties;
 using KeyAttribute = Dapper.Contrib.Extensions.KeyAttribute;
 using TableAttribute = Dapper.Contrib.Extensions.TableAttribute;
+using Web.Extensions;
 
 namespace Web.Models.Db
 {
@@ -20,9 +21,9 @@ namespace Web.Models.Db
         [Column("name")]
         public string Name { get; set; }
 
-        [Computed]
-        public List<IProperty> Properties { get; set; }
-
+        [Computed, JsonIgnore]
+        public List<KeyValuePair<Enums.ValueType, IProperty>> Properties { get; set; }
+        
         [Column("properties")]
         public string Settings
         {
@@ -32,7 +33,7 @@ namespace Web.Models.Db
             }
             set
             {
-                Properties = JsonConvert.DeserializeObject<List<IProperty>>(value);
+                Properties = value.DeserializeProperty();
             }
         }
     }

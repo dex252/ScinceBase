@@ -5,6 +5,6 @@
         /// <summary>
         /// Значение в конкретном периоде
         /// </summary>
-        public int CurrentValue { get; set; }
+        public int PeriodValue { get; set; }
     }
 }

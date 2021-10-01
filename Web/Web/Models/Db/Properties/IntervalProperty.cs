@@ -2,7 +2,7 @@
 
 namespace Web.Models.Db.Properties
 {
-    public class IntervalProperty
+    public class IntervalProperty: Property
     {
         /// <summary>
         /// Текущее значение
@@ -12,7 +12,7 @@ namespace Web.Models.Db.Properties
         /// <summary>
         /// Нормальные значения интервалов
         /// </summary>
-        public List<Interval> Intervals { get; set; }
+        public List<Interval> NormalIntervals { get; set; }
         
     }
 

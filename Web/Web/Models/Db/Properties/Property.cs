@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Web.Models.Db.Periods;
 using KeyAttribute = Dapper.Contrib.Extensions.KeyAttribute;
 using TableAttribute = Dapper.Contrib.Extensions.TableAttribute;
+using Web.Extensions;
 
 namespace Web.Models.Db.Properties
 {
@@ -20,15 +21,17 @@ namespace Web.Models.Db.Properties
         [Column("name")]
         public string Name { get; set; }
 
+        [JsonProperty(Order = 1)]
         [Column("type")]
         public Enums.ValueType ValueType { get; set; }
 
         [Column("current_period")]
         public decimal? CurrentPeriod { get; set; }
 
-        [Computed]
+        [Computed, JsonIgnore]
         public List<IPeriod> Periods { get; set; }
 
+        [JsonProperty(Order = 2)]
         [Column("periods")]
         public string Settings
         {
@@ -38,7 +41,7 @@ namespace Web.Models.Db.Properties
             }
             set
             {
-                Periods = JsonConvert.DeserializeObject<List<IPeriod>>(value);
+                Periods = value.DeserializePeriod(ValueType);
             }
         }
     }
