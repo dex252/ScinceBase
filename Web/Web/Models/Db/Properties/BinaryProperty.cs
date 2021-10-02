@@ -1,4 +1,6 @@
-﻿namespace Web.Models.Db.Properties
+﻿using System;
+
+namespace Web.Models.Db.Properties
 {
     public class BinaryProperty: Property
     {
