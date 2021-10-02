@@ -24,7 +24,10 @@ namespace Web.Managers
                         break;
                     }
                 case Enums.ValueType.INTERVAL:
-                    break;
+                    {
+                        CurrentStrategy = new IntervalStrategy(SettingsValues);
+                        break;
+                    }
                 case Enums.ValueType.ENUMS:
                     break;
                 default:

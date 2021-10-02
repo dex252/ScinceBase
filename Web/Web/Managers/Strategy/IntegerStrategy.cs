@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Web.Models.Db.Periods;
 using Web.Models.Db.Properties;
 using Web.Models.Settings;
@@ -7,42 +9,72 @@ namespace Web.Managers.Strategy
 {
     public class IntegerStrategy : IStrategy
     {
-        private SettingsValues SettingsValues { get; }
+        private SettingsValues Settings { get; }
 
         private Random Random { get; }
 
         public IntegerStrategy(SettingsValues settingsValues)
         {
-            SettingsValues = settingsValues;
+            Settings = settingsValues;
             Random = new Random();
         }
 
         public IProperty GetProperty(int index)
         {
             IntegerProperty property = new IntegerProperty();
-            //TODO: остановился здесь
-            property.NormalValue = 50 < Random.Next(100);
 
-            property.ValueType = Enums.ValueType.BINARY;
+            //Заполнение нормальных значений для свойства
+            property.NormalValue = new List<int>();
+            var diff = Settings.NormalPropertyMax - Settings.NormalPropertyMin;
+            if(diff > 6)
+            {
+                diff = Random.Next(1, 6);
+            }
+
+            for (int i = 0; i < Random.Next(1, diff); i++)
+            {
+                var value = Random.Next(Settings.NormalPropertyMin, Settings.NormalPropertyMax);
+                property.NormalValue.Add(value);
+            }
+            property.NormalValue = property.NormalValue.Distinct().ToList();
+
+            property.CurrentValue = Random.Next(Settings.AwailablePropertyMin, Settings.AwailablePropertyMax);
+
+            property.ValueType = Enums.ValueType.INTEGER;
             property.Guid = Guid.NewGuid().ToString();
-            property.Name = $"Property-{index}";
+            property.Name = $"Property-{index}-integer";
 
-            var countPeriods = SettingsValues.CountOfPeriods;
+            var countPeriods = Settings.CountOfPeriods;
             property.Periods = new List<IPeriod>();
             for (int i = 0; i < countPeriods; i++)
             {
-                property.Periods.Add(AddPeriod(i));
+                var previous = i - 1 > -1 ? property.Periods[i - 1] : null;
+                property.Periods.Add(AddPeriod(i, previous as IntegerPeriod));
             }
 
 
             return property;
         }
 
-        private IntegerPeriod AddPeriod(int index)
+        private IntegerPeriod AddPeriod(int index, IntegerPeriod previous)
         {
             var period = new IntegerPeriod();
             period.PeriodNumber = index;
-           
+            period.PeriodValue = Random.Next(Settings.AwailablePropertyMin, Settings.AwailablePropertyMax);
+
+            if(previous != null)
+            {
+                var recursiveValidation = 0;
+                while(period.PeriodValue == previous.PeriodValue)
+                {
+                    period.PeriodValue = Random.Next(Settings.AwailablePropertyMin, Settings.AwailablePropertyMax);
+                    recursiveValidation++;
+                    if(recursiveValidation > 10)
+                    {
+                        throw new Exception($"Бесконечная рекурсиваня валидация");
+                    }
+                }
+            }
 
             return period;
         }
