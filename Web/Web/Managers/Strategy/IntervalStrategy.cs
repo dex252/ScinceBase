@@ -20,41 +20,91 @@ namespace Web.Managers.Strategy
 
         public IProperty GetProperty(int index)
         {
-            throw new NotImplementedException();
-            //TODO: продолжить отсюда
-            //IntervalProperty property = new IntervalProperty();
-            //property.NormalValue = 50 < Random.Next(100);
-            //property.CurrentValue = 50 > Random.Next(100);
+           
+            IntervalProperty property = new IntervalProperty();
 
-            //property.ValueType = Enums.ValueType.BINARY;
-            //property.Guid = Guid.NewGuid().ToString();
-            //property.Name = $"Property-{index}-binary";
+            property.NormalIntervals = new List<Interval>();
+            var interval = new Interval()
+            {
+                Min = 1,
+                Max = 2
+            };
 
-            //var countPeriods = Settings.CountOfPeriods;
-            //property.Periods = new List<IPeriod>();
-            //for (int i = 0; i < countPeriods; i++)
-            //{
-            //    var previous = i - 1 > -1 ? property.Periods[i - 1] : null;
-            //    property.Periods.Add(AddPeriod(i, previous as IntervalPeriod));
-            //}
+            var diff = Settings.AwailablePropertyMax - Settings.AwailablePropertyMin;
+            
+            interval.Min = Random.Next(Settings.AwailablePropertyMin, Settings.AwailablePropertyMax - 1);
+            interval.Max = Random.Next(interval.Min, Settings.AwailablePropertyMax);
+
+            if(interval.Max == interval.Min)
+            {
+                interval.Max++;
+            }
+
+            if(interval.Max > Settings.AwailablePropertyMax)
+            {
+                throw new Exception("Максимальное значение на интервале превышено");
+            }
+            property.NormalIntervals.Add(interval);
+
+            property.CurrentValue = Random.Next(interval.Min, interval.Max);
+
+            property.ValueType = Enums.ValueType.INTERVAL;
+            property.Guid = Guid.NewGuid().ToString();
+            property.Name = $"Property-{index}-interval";
+
+            var countPeriods = Settings.CountOfPeriods;
+            property.Periods = new List<IPeriod>();
+            for (int i = 0; i < countPeriods; i++)
+            {
+                var previous = i - 1 > -1 ? property.Periods[i - 1] : null;
+                property.Periods.Add(AddPeriod(i, previous as IntervalPeriod, property));
+            }
 
 
-            //return property;
+            return property;
         }
 
-        private IntervalPeriod AddPeriod(int index, IntervalPeriod previous)
+        private IntervalPeriod AddPeriod(int index, IntervalPeriod previous, IntervalProperty property)
         {
-            throw new NotImplementedException();
-            //var period = new IntervalPeriod();
-            //period.PeriodNumber = index;
-            //period.PeriodValue = 50 < Random.Next(100);
+            var period = new IntervalPeriod();
+            period.PeriodNumber = index;
 
-            //if (previous != null && previous.PeriodValue == period.PeriodValue)
-            //{
-            //    period.PeriodValue = !period.PeriodValue;
-            //}
+            FillPeriod(property, period);
 
-            //return period;
+            if (previous != null)
+            {
+                while (previous.PeriodValue == period.PeriodValue)
+                {
+                    FillPeriod(property, period);
+                }
+               
+            }
+
+            return period;
+        }
+
+        private void FillPeriod(IntervalProperty property, IntervalPeriod period)
+        {
+            var recursiveValidation = 0;
+            var isValid = false;
+            while (!isValid)
+            {
+                period.PeriodValue = Random.Next(Settings.AwailablePropertyMin, Settings.AwailablePropertyMax);
+                isValid = true;
+                recursiveValidation++;
+                foreach (var interval in property.NormalIntervals)
+                {
+                    if (isValid && (interval.Min > period.PeriodValue || interval.Max < period.PeriodValue))
+                    {
+                        isValid = false;
+                    }
+                }
+
+                if (recursiveValidation > 50)
+                {
+                    throw new Exception("Бесконечная рекурсивная валидация");
+                }
+            }
         }
     }
 }

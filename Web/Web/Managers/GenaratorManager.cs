@@ -35,8 +35,12 @@ namespace Web.Managers
 
         private KeyValuePair<Enums.ValueType, IProperty> AddProperty(int index)
         {
-            //var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
-            var propertyType = 50 > Random.Next(100) ? Enums.ValueType.BINARY : Enums.ValueType.INTEGER;
+            var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
+            if (propertyType == Enums.ValueType.ENUMS)
+            {
+                propertyType = Random.Next(0, 100) > 50 ? Enums.ValueType.INTEGER : Enums.ValueType.BINARY;
+            }
+
             GenaratorContext.SetStrategy(propertyType);
 
             var property = GenaratorContext.GetProperty(index);
