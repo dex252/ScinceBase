@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Web.Models.Db.Properties
+namespace Web.Models.Db2.Properties
 {
-    public class IntegerProperty
+    public class IntegerProperty: PropertyV2
     {
         /// <summary>
         /// Текущее значение

@@ -1,8 +1,8 @@
 ﻿using Web.Repositories.Connection;
 using Web.ViewModels.Home;
 using Dapper;
-using Web.Models.Db;
 using System.Collections.Generic;
+using Web.Models.Db;
 
 namespace Web.Repositories
 {
@@ -18,7 +18,7 @@ namespace Web.Repositories
             var reviewViewModel = new ReviewViewModel();
             using (var connection = Connection.OpenConnection())
             {
-                var rowCount = connection.RecordCount<Classes>();
+                var rowCount = connection.RecordCount<RootNode>();
 
                 reviewViewModel.CountOfClasses = rowCount;
             }
@@ -26,7 +26,7 @@ namespace Web.Repositories
             return reviewViewModel;
         }
 
-        public int? InsertClass(Classes item)
+        public int? InsertClass(RootNode item)
         {
             using (var connection = Connection.OpenConnection())
             using (var transaction = connection.BeginTransaction())
@@ -38,11 +38,11 @@ namespace Web.Repositories
 
         }
 
-        public IEnumerable<Classes> GetClasses()
+        public IEnumerable<RootNode> GetClasses()
         {
             using (var connection = Connection.OpenConnection())
             { 
-                var result = connection.GetList<Classes>();
+                var result = connection.GetList<RootNode>();
                 return result;
             }
         }

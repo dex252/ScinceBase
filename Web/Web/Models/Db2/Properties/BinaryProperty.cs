@@ -1,6 +1,8 @@
-﻿namespace Web.Models.Db.Properties
+﻿using System;
+
+namespace Web.Models.Db2.Properties
 {
-    public class BinaryProperty
+    public class BinaryProperty: PropertyV2
     {
         /// <summary>
         /// Текущее значение

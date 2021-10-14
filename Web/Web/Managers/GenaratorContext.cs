@@ -1,5 +1,5 @@
 ﻿using Web.Managers.Strategy;
-using Web.Models.Db.Properties;
+using Web.Models.Db2.Properties;
 using Web.Models.Settings;
 
 namespace Web.Managers

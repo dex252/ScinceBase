@@ -17,12 +17,12 @@ namespace Web.Repositories
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        int? InsertClass(Classes item);
+        int? InsertClass(RootNode item);
 
         /// <summary>
         /// Получить список всех значений классов
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Classes> GetClasses();
+        IEnumerable<RootNode> GetClasses();
     }
 }

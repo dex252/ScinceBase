@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Web.Enums;
 
-namespace Web.Models.Db.Properties
+namespace Web.Models.Db2.Properties
 {
-    public class EnumProperty
+    public class EnumProperty: PropertyV2
     {
         public int? EnumId { get; set; }
 

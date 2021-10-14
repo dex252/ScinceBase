@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Web.Models.Db;
-using Web.Models.Db.Periods;
 using Web.Models.Db.Properties;
 using Web.Repositories;
 using Web.ViewModels.Shared.Errors;
+using ValueType = Web.Enums.ValueType;
 
 namespace Web.Controllers
 {
@@ -33,17 +33,146 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Insert()
         {
-            var item = new Classes();
+            var item = new RootNode();
 
-            item.Name = "Второй пионер";
             item.Guid = Guid.NewGuid().ToString();
-            item.Properties = new List<KeyValuePair<Enums.ValueType, IProperty>>();
+            item.Name = $"RootNode#{item.Guid}";
+            item.Attribures = new List<Models.Db.Attribute>();
 
-            item.Properties.Add(new KeyValuePair<Enums.ValueType, IProperty>(Enums.ValueType.BINARY, new BinaryProperty() { Name = "BINARY-1", ValueType = Enums.ValueType.BINARY, NormalValue =  false, Periods = new List<IPeriod>() { new BinaryPeriod() {PeriodValue = true } , new BinaryPeriod() { PeriodValue = false} }  }));
-            item.Properties.Add(new KeyValuePair<Enums.ValueType, IProperty>(Enums.ValueType.BINARY, new BinaryProperty() { Name = "BINARY-2", ValueType = Enums.ValueType.BINARY, NormalValue = true, Periods = new List<IPeriod>() { new BinaryPeriod() { PeriodValue = true }, new BinaryPeriod() { PeriodValue = false }, new BinaryPeriod() { PeriodValue = true } } }));
-            item.Properties.Add(new KeyValuePair<Enums.ValueType, IProperty>(Enums.ValueType.INTEGER, new IntegerProperty() { Name = "INTEGER-1", ValueType = Enums.ValueType.INTEGER, NormalValue = new List<int>() { 1,2,3}, CurrentValue = 2, Periods = new List<IPeriod>() { new IntegerPeriod() { PeriodValue = 2 }, new IntegerPeriod() { PeriodValue = 3 }, new IntegerPeriod() { PeriodValue = 4 } } }));
-            item.Properties.Add(new KeyValuePair<Enums.ValueType, IProperty>(Enums.ValueType.ENUMS, new EnumProperty() { Name = "ENUMS-1", ValueType = Enums.ValueType.ENUMS, NormalValues = new List<string>() { "Один, Два, Три, Четыре"}, CurrentValues = new List<string>() { "Два", "Три"}, Periods = new List<IPeriod>() { new EnumPeriod() { PeriodValue = new List<string>() { "Один" } } } }));
-            item.Properties.Add(new KeyValuePair<Enums.ValueType, IProperty>(Enums.ValueType.INTERVAL, new IntervalProperty() { Name = "INTERVAL-1", ValueType = Enums.ValueType.INTERVAL, NormalIntervals = new List<Interval>() { new Interval() { Min = 1, Max = 5}, new Interval() { Min = 7, Max = 12} }, Periods = new List<IPeriod>() { new IntervalPeriod() { PeriodValue = 3 }, new IntervalPeriod() { PeriodValue = 8 } } }));
+            var attr1 = new Models.Db.Attribute();
+            attr1.ValueType = ValueType.BINARY;
+            attr1.Name = "BINARY-1";
+            attr1.Guid = Guid.NewGuid().ToString();
+            attr1.BinarySettings = new BinaryProperty();
+            attr1.BinarySettings.NormalValue = false;
+            attr1.Periods = new List<Period>();
+            var period1 = new Period()
+            {
+                PeriodNumber = 1,
+                BinaryValue = true
+            };
+            var period2 = new Period()
+            {
+                PeriodNumber = 2,
+                BinaryValue = false
+            };
+            attr1.Periods.Add(period1);
+            attr1.Periods.Add(period2);
+
+            var attr2 = new Models.Db.Attribute();
+            attr2.ValueType = ValueType.BINARY;
+            attr2.Name = "BINARY-2";
+            attr2.Guid = Guid.NewGuid().ToString();
+            attr2.BinarySettings = new BinaryProperty();
+            attr2.BinarySettings.NormalValue = true;
+            attr2.Periods = new List<Period>();
+            var period3 = new Period()
+            {
+                PeriodNumber = 1,
+                BinaryValue = true
+            };
+            var period4 = new Period()
+            {
+                PeriodNumber = 2,
+                BinaryValue = false
+            };
+            var period5 = new Period()
+            {
+                PeriodNumber = 3,
+                BinaryValue = true
+            };
+            attr2.Periods.Add(period3);
+            attr2.Periods.Add(period4);
+            attr2.Periods.Add(period5);
+
+            var attr3 = new Models.Db.Attribute();
+            attr3.ValueType = ValueType.INTEGER;
+            attr3.Name = "INTEGER-1";
+            attr3.Guid = Guid.NewGuid().ToString();
+            attr3.IntegerSettings = new IntegerProperty();
+            attr3.IntegerSettings.NormalValue = new List<int>() { 1, 2, 3 };
+            attr3.Periods = new List<Period>();
+            var period6 = new Period()
+            {
+                PeriodNumber = 1,
+                NumberValue = 2
+            };
+            var period7 = new Period()
+            {
+                PeriodNumber = 2,
+                NumberValue = 5
+            };
+            var period8 = new Period()
+            {
+                PeriodNumber = 3,
+                NumberValue = 7
+            };
+            attr3.Periods.Add(period6);
+            attr3.Periods.Add(period7);
+            attr3.Periods.Add(period8);
+
+            var attr4 = new Models.Db.Attribute();
+            attr4.ValueType = ValueType.ENUMS;
+            attr4.Name = "ENUMS-1";
+            attr4.Guid = Guid.NewGuid().ToString();
+            attr4.EnumSettings = new EnumProperty();
+            attr4.EnumSettings.NormalValues = new List<string>() { "Один, Два, Три, Четыре" };
+            attr4.Periods = new List<Period>();
+            var period9 = new Period()
+            {
+                PeriodNumber = 1,
+                EnumValues = new List<string>() { "Два", "Три" }
+            };
+            var period10 = new Period()
+            {
+                PeriodNumber = 2,
+                EnumValues = new List<string>() { "Один" }
+            };
+            var period11 = new Period()
+            {
+                PeriodNumber = 3,
+                EnumValues = new List<string>() { "Пять" }
+            };
+            attr4.Periods.Add(period9);
+            attr4.Periods.Add(period10);
+            attr4.Periods.Add(period11);
+
+            var attr5 = new Models.Db.Attribute();
+            attr5.ValueType = ValueType.INTERVAL;
+            attr5.Name = "INTERVAL-1";
+            attr5.Guid = Guid.NewGuid().ToString();
+            attr5.IntervalSettings = new IntervalProperty();
+            attr5.IntervalSettings.NormalIntervals = new List<Interval>();
+            var int1 = new Interval() { Min = 1, Max = 6 };
+            var int2 = new Interval() { Min = 9, Max = 12 };
+            attr5.IntervalSettings.NormalIntervals.Add(int1);
+            attr5.IntervalSettings.NormalIntervals.Add(int2);
+
+            attr5.Periods = new List<Period>();
+            var period12 = new Period()
+            {
+                PeriodNumber = 1,
+                IntervalValues = new List<Interval>() { new Interval() { Min = 2, Max = 3} }
+            };
+            var period13 = new Period()
+            {
+                PeriodNumber = 2,
+                IntervalValues = new List<Interval>() { new Interval() { Min = 4, Max = 5 } }
+            };
+            var period14 = new Period()
+            {
+                PeriodNumber = 3,
+                IntervalValues = new List<Interval>() { new Interval() { Min = 7, Max = 11 } }
+            };
+            attr5.Periods.Add(period12);
+            attr5.Periods.Add(period13);
+            attr5.Periods.Add(period14);
+
+            item.Attribures.Add(attr1);
+            item.Attribures.Add(attr2);
+            item.Attribures.Add(attr3);
+            item.Attribures.Add(attr4);
+            item.Attribures.Add(attr5);
 
             var id = SmartRepository.InsertClass(item);
 

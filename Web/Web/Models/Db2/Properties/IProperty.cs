@@ -1,4 +1,4 @@
-﻿namespace Web.Models.Db.Properties
+﻿namespace Web.Models.Db2.Properties
 {
     public interface IProperty
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Web.Models.Db.Properties
+namespace Web.Models.Db2.Properties
 {
-    public class IntervalProperty
+    public class IntervalProperty: PropertyV2
     {
         /// <summary>
         /// Текущее значение
@@ -13,7 +13,7 @@ namespace Web.Models.Db.Properties
         /// Нормальные значения интервалов
         /// </summary>
         public List<Interval> NormalIntervals { get; set; }
-
+        
     }
 
     public class Interval

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Web.Models.Db.Properties;
+using Web.Models.Db2.Properties;
 using Web.Models.Settings;
 
 namespace Web.Managers
 {
-    public class GeneratorManager : IGeneratorManager
+    public class GeneratorManagerJson : IGeneratorManager
     {
         private Random Random { get; }
 
@@ -13,7 +13,7 @@ namespace Web.Managers
 
         private IGenaratorContext GenaratorContext { get; }
 
-        public GeneratorManager(IGenaratorContext genaratorContext)
+        public GeneratorManagerJson(IGenaratorContext genaratorContext)
         {
             Random = new Random();
             EnumsTypes = Enum.GetValues(typeof(Enums.ValueType));

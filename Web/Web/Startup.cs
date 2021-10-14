@@ -52,7 +52,7 @@ namespace Web
 
             services.AddTransient<IGenaratorContext, GenaratorContext>();
 
-            services.AddScoped<IGeneratorManager, GeneratorManager>();
+            services.AddScoped<IGeneratorManager, GeneratorManagerAttr>();
             services.AddScoped<ISmartRepository, SmartRepository>();
 
             services.Configure<ApiBehaviorOptions>(options =>
