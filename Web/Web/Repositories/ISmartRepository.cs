@@ -24,5 +24,17 @@ namespace Web.Repositories
         /// </summary>
         /// <returns></returns>
         IEnumerable<RootNode> GetClasses();
+
+        /// <summary>
+        /// Добавить новые перечисленния
+        /// </summary>
+        /// <param name="enums"></param>
+       decimal? InsertNewEnums(EnumsValue enums);
+
+        /// <summary>
+        /// Получить все перечисления
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<EnumsValue> GetAllEnums();
     }
 }

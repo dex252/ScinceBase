@@ -46,5 +46,25 @@ namespace Web.Repositories
                 return result;
             }
         }
+
+        public decimal? InsertNewEnums(EnumsValue enums)
+        {
+            using (var connection = Connection.OpenConnection())
+            using (var transaction = connection.BeginTransaction())
+            {
+                var result = connection.Insert(enums, transaction);
+                transaction.Commit();
+                return result;
+            }
+        }
+
+        public IEnumerable<EnumsValue> GetAllEnums()
+        {
+            using (var connection = Connection.OpenConnection())
+            {
+                var result = connection.GetList<EnumsValue>();
+                return result;
+            }
+        }
     }
 }
