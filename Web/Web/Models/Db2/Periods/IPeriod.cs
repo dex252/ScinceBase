@@ -1,4 +1,4 @@
-﻿namespace Web.Models.Db.Periods
+﻿namespace Web.Models.Db2.Periods
 {
     public interface IPeriod
     {

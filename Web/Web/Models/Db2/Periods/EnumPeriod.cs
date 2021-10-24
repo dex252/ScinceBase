@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Web.Models.Db.Periods
+namespace Web.Models.Db2.Periods
 {
-    public class EnumPeriod: Period
+    public class EnumPeriod: PeriodV2
     {
         /// <summary>
         /// Значения в конкретном периоде

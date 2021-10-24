@@ -1,6 +1,6 @@
 ﻿namespace Web.Models.Db.Properties
 {
-    public class BinaryProperty: Property
+    public class BinaryProperty
     {
         /// <summary>
         /// Текущее значение

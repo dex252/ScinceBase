@@ -1,10 +1,10 @@
-﻿namespace Web.Models.Db.Periods
+﻿namespace Web.Models.Db2.Periods
 {
-    public class IntegerPeriod: Period
+    public class BinaryPeriod: PeriodV2
     {
         /// <summary>
         /// Значение в конкретном периоде
         /// </summary>
-        public int PeriodValue { get; set; }
+        public bool PeriodValue { get; set; }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Web.Enums;
 
 namespace Web.Models.Db.Properties
 {
-    public class EnumProperty: Property
+    public class EnumProperty
     {
         public int? EnumId { get; set; }
 
@@ -16,5 +15,15 @@ namespace Web.Models.Db.Properties
         /// Нормальные значения
         /// </summary>
         public List<string> NormalValues { get; set; }
+
+        /// <summary>
+        /// Название перечисления
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Уникальный идентификатор перечисления
+        /// </summary>
+        public string Guid { get; set; }
     }
 }

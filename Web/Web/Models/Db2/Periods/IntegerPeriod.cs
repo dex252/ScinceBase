@@ -1,6 +1,6 @@
-﻿namespace Web.Models.Db.Periods
+﻿namespace Web.Models.Db2.Periods
 {
-    public class IntervalPeriod: Period
+    public class IntegerPeriod: PeriodV2
     {
         /// <summary>
         /// Значение в конкретном периоде

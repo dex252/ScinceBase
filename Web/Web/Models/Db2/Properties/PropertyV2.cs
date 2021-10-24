@@ -2,15 +2,15 @@
 using Dapper.Contrib.Extensions;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using Web.Models.Db.Periods;
+using Web.Models.Db2.Periods;
 using KeyAttribute = Dapper.Contrib.Extensions.KeyAttribute;
 using TableAttribute = Dapper.Contrib.Extensions.TableAttribute;
 using Web.Extensions;
 
-namespace Web.Models.Db.Properties
+namespace Web.Models.Db2.Properties
 {
     [Table("properties")]
-    public class Property: IProperty
+    public class PropertyV2: IProperty
     {
         [Key]
         public decimal? Id { get; set; }

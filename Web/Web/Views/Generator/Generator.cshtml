@@ -12,27 +12,141 @@
 
 <div class="generator-container">
     <form class="flex-column" id="input-groups">
-        <input class="form-control col-6 mb-1"
-               id="count-of-classes"
-               name="count-of-classes"
-               type="text"
-               placeholder="Число классов"
-               data-val="true"
-               data-val-required="Значение не может быть пустым" />
-        <span data-valmsg-for="count-of-classes" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+        <div class="col-6 mb-2">
+            <span>Число классов:</span>
+            <input class="form-control "
+                   id="count-of-classes"
+                   name="CountOfClasses"
+                   type="text"
+                   placeholder="Число классов"
+                   data-val="true"
+                   value="10"
+                   data-val-required="Задайте значение в промежутке [1, 99]" />
+            <span data-valmsg-for="CountOfClasses" data-valmsg-replace="true" class="text-danger small-text-size"></span>
 
-        <input class="form-control col-6"
-               id="count-of-properties"
-               name="count-of-properties"
-               type="text"
-               placeholder="Число признаков"
-               data-val="true"
-               data-val-required="Значение не может быть пустым" />
-        <span data-valmsg-for="count-of-properties" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+        </div>
+
+        <div class=" col-6 mb-2">
+            <span>Число признаков:</span>
+            <input class="form-control"
+                   id="count-of-properties"
+                   name="CountOfProperties"
+                   type="text"
+                   placeholder="Число признаков"
+                   data-val="true"
+                   value="10"
+                   data-val-required="Задайте значение в промежутке [1, 999]" />
+            <span data-valmsg-for="CountOfProperties" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+        </div>
+
+
+        <div class="col-6 row">
+            <div class="col-6">
+                <span>Нижняя граница признаков:</span>
+                <input class="form-control "
+                       id="awailable-property-min"
+                       name="AwailablePropertyMin"
+                       type="text"
+                       data-min="2"
+                       data-max="99"
+                       value="10"
+                       data-val="true"
+                       data-val-required="Задайте значение в промежутке [2, 99]" />
+                <span data-valmsg-for="AwailablePropertyMin" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+            </div>
+            <div class="col-6">
+                <span>Верхняя граница признаков:</span>
+                <input class="form-control justify-content-end"
+                       id="awailable-property-max"
+                       name="AwailablePropertyMax"
+                       type="text"
+                       data-min="2"
+                       data-max="99"
+                       value="90"
+                       data-val="true"
+                       data-val-required="Задайте значение в промежутке [2, 99]" />
+                <span data-valmsg-for="AwailablePropertyMax" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+            </div>
+        </div>
+
+        <div class="col-6 row mb-2">
+            <div class="col-6">
+                <span>Нижняя граница нормальных значений:</span>
+                <input class="form-control "
+                       id="normal-property-min"
+                       name="NormalPropertyMin"
+                       type="text"
+                       data-min="1"
+                       data-max="99"
+                       value="20"
+                       data-val="true"
+                       data-val-required="Задайте значение в промежутке [1, 99-B1]" />
+                <span data-valmsg-for="NormalPropertyMin" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+            </div>
+            <div class="col-6">
+                <span>Верхняя граница нормальных значений:</span>
+                <input class="form-control justify-content-end"
+                       id="normal-property-max"
+                       name="NormalPropertyMax"
+                       type="text"
+                       data-min="1"
+                       data-max="99"
+                       value="40"
+                       data-val="true"
+                       data-val-required="Задайте значение в промежутке [1, 99-B1]" />
+                <span data-valmsg-for="NormalPropertyMax" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+            </div>
+        </div>
+
+        <div class="col-6 mb-2">
+            <span>Максимальное число периодов:</span>
+            <input class="form-control justify-content-end"
+                   id="count-of-periods"
+                   name="CountOfPeriods"
+                   type="text"
+                   data-min="1"
+                   data-max="5"
+                   value="5"
+                   data-val="true"
+                   data-val-required="Задайте значение в промежутке [1, 5]" />
+            <span data-valmsg-for="CountOfPeriods" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+        </div>
+
+        <div class="col-6 row mb-2">
+            <div class="col-6">
+                <span>Нижняя граница периодов:</span>
+                <input class="form-control"
+                       id="normal-periods-min"
+                       name="NormalPeriodsMin"
+                       type="text"
+                       data-min="1"
+                       data-max="12"
+                       value="2"
+                       data-val="true"
+                       data-val-required="Задайте значение в промежутке [1, 1-Г1]" />
+                <span data-valmsg-for="NormalPeriodsMin" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+            </div>
+            <div class="col-6">
+                <span>Верхняя граница периодов:</span>
+                <input class="form-control justify-content-end"
+                       id="normal-periods-max"
+                       name="NormalPeriodsMax"
+                       type="text"
+                       data-min="2"
+                       data-max="12"
+                       value="10"
+                       data-val="true"
+                       data-val-required="Задайте значение в промежутке [1, 12]" />
+                <span data-valmsg-for="NormalPeriodsMax" data-valmsg-replace="true" class="text-danger small-text-size"></span>
+            </div>
+        </div>
+
     </form>
     <div class="row pt-1 pr-0 col-6 justify-content-end">
-        <button type="button" 
+        <button type="button"
                 id="generator-button-ok"
-                class="btn btn-outline-primary">Генератор</button>
+                class="btn btn-outline-primary">
+            Генератор
+        </button>
     </div>
 </div>

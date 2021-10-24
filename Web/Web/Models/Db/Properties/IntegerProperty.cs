@@ -2,7 +2,7 @@
 
 namespace Web.Models.Db.Properties
 {
-    public class IntegerProperty: Property
+    public class IntegerProperty
     {
         /// <summary>
         /// Текущее значение

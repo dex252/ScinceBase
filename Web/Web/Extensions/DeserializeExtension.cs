@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using Web.Models.Db.Periods;
-using Web.Models.Db.Properties;
+using Web.Models.Db2.Periods;
+using Web.Models.Db2.Properties;
 
 namespace Web.Extensions
 {

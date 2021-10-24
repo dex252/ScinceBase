@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Web.Models.Db.Properties
 {
-    public class IntervalProperty: Property
+    public class IntervalProperty
     {
         /// <summary>
         /// Текущее значение
@@ -10,10 +11,17 @@ namespace Web.Models.Db.Properties
         public int CurrentValue { get; set; }
 
         /// <summary>
+        /// Нормальные значения интервала
+        /// </summary>
+        public Interval NormalInterval { get; set; }
+
+        /// <summary>
         /// Нормальные значения интервалов
         /// </summary>
+        [System.Obsolete]
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public List<Interval> NormalIntervals { get; set; }
-        
+
     }
 
     public class Interval

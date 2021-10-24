@@ -1,8 +1,9 @@
 ﻿using Web.Repositories.Connection;
 using Web.ViewModels.Home;
 using Dapper;
-using Web.Models.Db;
 using System.Collections.Generic;
+using Web.Models.Db;
+using Web.Models.Review;
 
 namespace Web.Repositories
 {
@@ -13,12 +14,12 @@ namespace Web.Repositories
         {
             Connection = connection;
         }
-        public ReviewViewModel GetReview()
+        public ReviewModel GetReview()
         {
-            var reviewViewModel = new ReviewViewModel();
+            var reviewViewModel = new ReviewModel();
             using (var connection = Connection.OpenConnection())
             {
-                var rowCount = connection.RecordCount<Classes>();
+                var rowCount = connection.RecordCount<RootNode>();
 
                 reviewViewModel.CountOfClasses = rowCount;
             }
@@ -26,7 +27,7 @@ namespace Web.Repositories
             return reviewViewModel;
         }
 
-        public int? InsertClass(Classes item)
+        public int? InsertClass(RootNode item)
         {
             using (var connection = Connection.OpenConnection())
             using (var transaction = connection.BeginTransaction())
@@ -38,12 +39,47 @@ namespace Web.Repositories
 
         }
 
-        public IEnumerable<Classes> GetClasses()
+        public IEnumerable<RootNode> GetClasses()
         {
             using (var connection = Connection.OpenConnection())
             { 
-                var result = connection.GetList<Classes>();
+                var result = connection.GetList<RootNode>();
                 return result;
+            }
+        }
+
+        public decimal? InsertNewEnums(EnumsValue enums)
+        {
+            using (var connection = Connection.OpenConnection())
+            using (var transaction = connection.BeginTransaction())
+            {
+                var result = connection.Insert(enums, transaction);
+                transaction.Commit();
+                return result;
+            }
+        }
+
+        public IEnumerable<EnumsValue> GetAllEnums()
+        {
+            using (var connection = Connection.OpenConnection())
+            {
+                var result = connection.GetList<EnumsValue>();
+                return result;
+            }
+        }
+
+        public void SaveClasses(List<RootNode> nodes)
+        {
+            using (var connection = Connection.OpenConnection())
+            using (var transaction = connection.BeginTransaction())
+            {
+                //TODO: переписать на BulkInsert
+                foreach (var node in nodes)
+                {
+                    connection.Insert(node, transaction);
+                }
+
+                transaction.Commit();
             }
         }
     }
