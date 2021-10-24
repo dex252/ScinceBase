@@ -46,6 +46,8 @@ namespace Web.Managers
                 nodes.Add(AddNode(i, properties, postfix));
             }
 
+            //TODO: что делать с нормальными занчениями, когда число периодов = 1??? Для булевых период всегда будет нормальным
+
             return nodes;
         }
 
@@ -61,7 +63,7 @@ namespace Web.Managers
 
         private Attribute AddProperty(int index)
         {
-            var propertyType = Enums.ValueType.INTEGER;
+            var propertyType = Enums.ValueType.BINARY;
             //var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
             //if (propertyType == Enums.ValueType.ENUMS)
             //{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Web.Models.Db;
 using Web.Models.Db.Properties;
 using Web.Models.Settings;
@@ -37,7 +38,28 @@ namespace Web.Managers.Strategy
                 property.Periods.Add(AddPeriod(i, previous));
             }
 
+            Validate(property);
+
             return property;
+        }
+
+        /// <summary>
+        ///  Хотя бы одно из значений в периодах должно быть нормальным
+        /// </summary>
+        /// <param name="property"></param>
+        private void Validate(Attribute property)
+        {
+            var normalValue = property.BinarySettings.NormalValue;
+            var periodValues = property.Periods.Select(e => e.BinaryValue);
+
+            var isValid = periodValues.Contains(normalValue);
+
+            if (!isValid)
+            {
+                var index = Random.Next(0, property.Periods.Count - 1);
+
+                property.Periods[index].BinaryValue = normalValue;
+            }
         }
 
         private Period AddPeriod(int index, Period previous)
