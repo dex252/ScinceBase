@@ -67,7 +67,7 @@ let config = {
                         options: {
                             publicPath: 'wwwroot/bundles',
                             hmr: process.env.NODE_ENV === 'production'
-                        },
+                        }
                     },
                     { loader: 'css-loader' }
                 ],
@@ -98,6 +98,11 @@ let config = {
             }, {
                 test: /\.(woff|woff2|ttf|eot|svg|gif|png)(\?[\s\S]+)?$/,
                 loader: 'file-loader',
+                query: {
+                    name: '[name].[hash:6].[ext]',
+                    //outputPath: '../../'
+                },
+               
             },
             {
                 test: require.resolve('jquery'),

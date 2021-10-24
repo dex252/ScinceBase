@@ -1,6 +1,8 @@
 ﻿import { renderErrorMessage, renderError } from 'Scripts/Shared/errors';
 import 'jstree';
-import {Node, State, Attr} from '../../../Shared/TreeTemplates/tree-models';
+import { Node, State, Attr } from '../../../Shared/TreeTemplates/tree-models';
+//import 'styles/libs/dist/themes/default/style.min.css';
+//import 'libs/jstree/dist/themes/default/style.min.css';
 
 export class EnumDirector{
 
@@ -39,7 +41,7 @@ export class EnumDirector{
                     'data': nodes,
                     'multiple': true,
                     'themes':{
-                        'name': 'default-dark',
+                        'name': 'default',
                         'url': false,
                         'icons': false
                     },

@@ -1,12 +1,14 @@
-﻿@{  ViewBag.Title = "Redactor";
+﻿@{ ViewBag.Title = "Redactor";
     ViewBag.IsWebpack = true;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="~/bundles/redactorBundle.css" type="text/css" />
+<link rel="stylesheet" href="~/libs/jstree/dist/themes/default/style.css" type="text/css" />
 
 @section scripts{
     <script src="~/bundles/redactorBundle.js"></script>
+    @*<script src="~/libs/jstree/dist/jstree.min.js"></script>*@
 }
 
 <div class="redactor-container">
@@ -17,10 +19,12 @@
                    placeholder="Введите название перечисления" />
         </div>
         <div class="d-flex mb-1">
-            <input class="enums-input form-control col-6" 
+            <input class="enums-input form-control col-6"
                    placeholder="Введите новое перечисление через запятую" />
-            <button type="button" 
-                    class="enums-button-input ml-1 btn btn-outline-primary">Добавить</button>
+            <button type="button"
+                    class="enums-button-input ml-1 btn btn-outline-primary">
+                Добавить
+            </button>
         </div>
     </div>
     <div id="enums-tree-container"></div>
