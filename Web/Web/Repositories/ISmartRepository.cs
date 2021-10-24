@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Web.Models.Db;
+using Web.Models.Review;
 using Web.ViewModels.Home;
 
 namespace Web.Repositories
@@ -10,7 +11,7 @@ namespace Web.Repositories
         /// Вернуть обзор на все содержимое таблицы
         /// </summary>
         /// <returns></returns>
-        ReviewViewModel GetReview();
+        ReviewModel GetReview();
 
         /// <summary>
         /// Вставляет запись в таблицу и возвращает её id
@@ -29,7 +30,13 @@ namespace Web.Repositories
         /// Добавить новые перечисленния
         /// </summary>
         /// <param name="enums"></param>
-       decimal? InsertNewEnums(EnumsValue enums);
+        decimal? InsertNewEnums(EnumsValue enums);
+
+        /// <summary>
+        /// Сохранить классы в таблицу
+        /// </summary>
+        /// <param name="nodes"></param>
+        void SaveClasses(List<RootNode> nodes);
 
         /// <summary>
         /// Получить все перечисления

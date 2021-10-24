@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using KeyAttribute = Dapper.Contrib.Extensions.KeyAttribute;
 using TableAttribute = Dapper.Contrib.Extensions.TableAttribute;
-using System.Linq;
 using Newtonsoft.Json;
 using Computed = Dapper.Contrib.Extensions.ComputedAttribute;
 

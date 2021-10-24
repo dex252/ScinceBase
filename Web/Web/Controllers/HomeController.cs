@@ -6,6 +6,7 @@ using System.Diagnostics;
 using Web.Models.Db;
 using Web.Models.Db.Properties;
 using Web.Repositories;
+using Web.ViewModels.Home;
 using Web.ViewModels.Shared.Errors;
 using ValueType = Web.Enums.ValueType;
 
@@ -26,11 +27,18 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var reviewModel = SmartRepository.GetReview();
-            return View("~/Views/Home/Index.cshtml", reviewModel);
+            var viewModel = new HomeViewModel();
+            viewModel.ReviewModel = SmartRepository.GetReview();
+
+            return View("~/Views/Home/Index.cshtml", viewModel);
         }
 
+        /// <summary>
+        /// Тест
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
+        [Obsolete]
         public IActionResult Insert()
         {
             var item = new RootNode();

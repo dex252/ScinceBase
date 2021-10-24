@@ -20,11 +20,11 @@ export class EnumDirector{
 
     async Init(){
        let data = await this.GetAllEnums();
-       if(!data || !data.values){
+       if(!data || !data.Values){
            return;
        }
 
-       let nodes = this.ConvertToNodes(data.values);
+       let nodes = this.ConvertToNodes(data.Values);
        await this.TreeBuild(nodes);
 
        console.info(data);
@@ -59,17 +59,17 @@ export class EnumDirector{
         for (let index = 0; index < data.length; index++) {
             let item = data[index];
             
-            let text = item.name;
-            let id = item.guid;
-            let  state = new State(true, false, false);
+            let text = item.Name;
+            let id = item.Guid;
+            let state = new State(true, false, false);
 
             nodes.push(new Node(id, '#', text, null, state));
-            for (let i = 0; i < item.values.length; i++) {
-                let elem = item.values[i];
+            for (let i = 0; i < item.Values.length; i++) {
+                let elem = item.Values[i];
                 let text = elem;
 
-                let id = item.guid + i;
-                let parent = item.guid;
+                let id = item.Guid + i;
+                let parent = item.Guid;
                 let state = new State(true, false, false);
                 nodes.push(new Node(id, parent, text, null, state));
             }
@@ -110,9 +110,21 @@ export class EnumDirector{
 
             inputVals = inputVals.replace(/\s/g, '').split(',');
 
-            await DIRECTOR.InsertNewEnum(inputVals, name);
+            if(inputVals.length < 2){
+                renderErrorMessage('Необходимо ввести хотя бы 2 значения перечислений');
+                return;
+            }
+
+            try{
+                await DIRECTOR.InsertNewEnum(inputVals, name);
+                document.location.href = '../Redactor/Index';
+            } catch(e){
+              
+            }
+           
         });
     }
+
 
     async InsertNewEnum(enums, name){
         let data = {

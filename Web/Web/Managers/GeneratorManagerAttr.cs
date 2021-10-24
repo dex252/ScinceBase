@@ -63,18 +63,12 @@ namespace Web.Managers
 
         private Attribute AddProperty(int index)
         {
-            var propertyType = Enums.ValueType.INTERVAL;
-            //var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
-            //if (propertyType == Enums.ValueType.ENUMS)
-            //{
-            //    propertyType = Random.Next(0, 100) > 50 ? Enums.ValueType.INTEGER : Enums.ValueType.BINARY;
-            //}
+            var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
 
             GenaratorContext.SetStrategy(propertyType);
 
             var property = GenaratorContext.GetProperty(index);
             return property;
-            //return new KeyValuePair<Enums.ValueType, IProperty>(propertyType, property);
         }
     }
 }

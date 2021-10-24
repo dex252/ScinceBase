@@ -3,6 +3,7 @@ using Web.ViewModels.Home;
 using Dapper;
 using System.Collections.Generic;
 using Web.Models.Db;
+using Web.Models.Review;
 
 namespace Web.Repositories
 {
@@ -13,9 +14,9 @@ namespace Web.Repositories
         {
             Connection = connection;
         }
-        public ReviewViewModel GetReview()
+        public ReviewModel GetReview()
         {
-            var reviewViewModel = new ReviewViewModel();
+            var reviewViewModel = new ReviewModel();
             using (var connection = Connection.OpenConnection())
             {
                 var rowCount = connection.RecordCount<RootNode>();
@@ -64,6 +65,21 @@ namespace Web.Repositories
             {
                 var result = connection.GetList<EnumsValue>();
                 return result;
+            }
+        }
+
+        public void SaveClasses(List<RootNode> nodes)
+        {
+            using (var connection = Connection.OpenConnection())
+            using (var transaction = connection.BeginTransaction())
+            {
+                //TODO: переписать на BulkInsert
+                foreach (var node in nodes)
+                {
+                    connection.Insert(node, transaction);
+                }
+
+                transaction.Commit();
             }
         }
     }

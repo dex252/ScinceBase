@@ -1,4 +1,4 @@
-﻿@model Web.ViewModels.Home.ReviewViewModel
+﻿@model Web.ViewModels.Home.HomeViewModel
 
 @{
     ViewBag.Title = "Home";
@@ -7,12 +7,16 @@
 }
 
 <link rel="stylesheet" href="~/bundles/homeBundle.css" type="text/css" />
+<link rel="stylesheet" href="~/libs/jstree/dist/themes/default/style.css" type="text/css" />
 
 @section scripts{
     <script src="~/bundles/homeBundle.js"></script>
 }
 
 <div class="home-container">
-    <div>Текущее число классов: @Model.CountOfClasses</div>
-    <div>Текущее число признаков: @Model.CountOfProperties</div>
+    <div>Текущее число классов: @Model.ReviewModel.CountOfClasses</div>
+    <div>Текущее число признаков: @Model.ReviewModel.CountOfProperties</div>
+</div>
+
+<div id="nodes-container">
 </div>

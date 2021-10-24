@@ -31,7 +31,10 @@ namespace Web.Managers
                         break;
                     }
                 case Enums.ValueType.ENUMS:
-                    break;
+                    {
+                        CurrentStrategy = new EnumsStrategy(SettingsValues, EnumsValues);
+                        break;
+                    }
                 default:
                     break;
             }

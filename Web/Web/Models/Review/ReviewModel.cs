@@ -1,6 +1,6 @@
-﻿namespace Web.ViewModels.Home
+﻿namespace Web.Models.Review
 {
-    public class ReviewViewModel
+    public class ReviewModel
     {
         public decimal CountOfClasses { get; set; }
 

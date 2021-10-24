@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Web.Managers;
 using Web.Models.Settings;
+using Web.Repositories;
 
 namespace Web.Controllers
 {
     public class GeneratorController : Controller
     {
         private IGeneratorManager GeneratorManager { get; }
-        public GeneratorController(IGeneratorManager generatorManager)
+        private ISmartRepository SmartRepository { get; }
+
+        public GeneratorController(IGeneratorManager generatorManager, ISmartRepository smartRepository)
         {
             GeneratorManager = generatorManager;
+            SmartRepository = smartRepository;
         }
 
         [HttpGet]
@@ -22,6 +26,7 @@ namespace Web.Controllers
         public IActionResult SetGeneratorParametres([FromBody] SettingsValues data)
         {
             var nodes = GeneratorManager.GenerateNodes(data);
+            SmartRepository.SaveClasses(nodes);
             return Ok(nodes);
         }
     }

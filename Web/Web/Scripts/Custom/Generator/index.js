@@ -95,6 +95,7 @@ $(() => {
             error: e => renderError(e),
             success: response => {
                 console.info(response);
+                document.location.href = '../Home/Index';
             }
         });
     }
