@@ -1,5 +1,6 @@
-﻿using Web.Managers.Strategy;
-using Web.Models.Db2.Properties;
+﻿using System.Collections.Generic;
+using Web.Managers.Strategy;
+using Web.Models.Db;
 using Web.Models.Settings;
 
 namespace Web.Managers
@@ -8,6 +9,7 @@ namespace Web.Managers
     {
         public IStrategy CurrentStrategy { get; set; }
         public SettingsValues SettingsValues { get; set; }
+        public List<EnumsValue> EnumsValues { get ; set ; }
 
         public void SetStrategy(Enums.ValueType valueType)
         {
@@ -35,7 +37,7 @@ namespace Web.Managers
             }
         }
 
-        public IProperty GetProperty(int index)
+        public Attribute GetProperty(int index)
         {
             return CurrentStrategy.GetProperty(index);
         }

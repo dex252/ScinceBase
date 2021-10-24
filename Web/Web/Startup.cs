@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 using Web.Managers;
 using Web.Middlewares;
 using Web.Repositories;
@@ -43,8 +44,11 @@ namespace Web
                     });
             });
 
-            services.AddControllers().AddJsonOptions(options =>
-                                 options.JsonSerializerOptions.IgnoreNullValues = true);
+            services.AddControllers()
+                .AddNewtonsoftJson(options => {
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();})
+                .AddJsonOptions(options =>
+                    options.JsonSerializerOptions.IgnoreNullValues = true);
 
             services.AddMvc();
 

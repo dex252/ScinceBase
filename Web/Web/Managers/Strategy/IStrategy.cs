@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Web.Models.Db2.Properties;
+﻿using Web.Models.Db;
 
 namespace Web.Managers.Strategy
 {
     public interface IStrategy
     {
-        IProperty GetProperty(int index);
+        Attribute GetProperty(int index);
     }
 }

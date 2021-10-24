@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Web.Models.Db2.Periods;
-using Web.Models.Db2.Properties;
+using Web.Models.Db;
+using Web.Models.Db.Properties;
 using Web.Models.Settings;
+using Attribute = Web.Models.Db.Attribute;
 
 namespace Web.Managers.Strategy
 {
@@ -18,41 +19,75 @@ namespace Web.Managers.Strategy
             Random = new Random();
         }
 
-        public IProperty GetProperty(int index)
+        public Attribute GetProperty(int index)
         {
-            BinaryProperty property = new BinaryProperty();
-            property.NormalValue = 50 < Random.Next(100);
-            property.CurrentValue = 50 > Random.Next(100);
-
-            property.ValueType = Enums.ValueType.BINARY;
-            property.Guid = Guid.NewGuid().ToString();
+            var property = new Attribute();
             property.Name = $"Property-{index}-binary";
+            property.Guid = Guid.NewGuid().ToString();
+            property.ValueType = Enums.ValueType.BINARY;
+            property.BinarySettings = new BinaryProperty();
+            property.BinarySettings.NormalValue = 50 < Random.Next(100);
 
-            var countPeriods = Settings.CountOfPeriods;
-            property.Periods = new List<IPeriod>();
+            var countPeriods = Random.Next(1, Settings.CountOfPeriods);
+            property.Periods = new List<Period>(countPeriods);
+
             for (int i = 0; i < countPeriods; i++)
             {
-                var previous = i-1 > -1 ? property.Periods[i-1]: null;
-                property.Periods.Add(AddPeriod(i, previous as BinaryPeriod));
+                var previous = i - 1 > -1 ? property.Periods[i - 1] : null;
+                property.Periods.Add(AddPeriod(i, previous));
             }
-          
 
             return property;
         }
 
-        private BinaryPeriod AddPeriod(int index, BinaryPeriod previous)
+        private Period AddPeriod(int index, Period previous)
         {
-            var period = new BinaryPeriod();
+            var period = new Period();
             period.PeriodNumber = index;
-            period.PeriodValue = 50 < Random.Next(100);
+            period.BinaryValue = 50 < Random.Next(100);
 
-            if(previous != null && previous.PeriodValue == period.PeriodValue)
+            if (previous != null && previous.BinaryValue == period.BinaryValue)
             {
-                period.PeriodValue = !period.PeriodValue;
+                period.BinaryValue = !period.BinaryValue;
             }
 
             return period;
         }
 
+        //public Attribute GetProperty(int index)
+        //{
+        //    BinaryProperty property = new BinaryProperty();
+        //    property.NormalValue = 50 < Random.Next(100);
+        //    property.CurrentValue = 50 > Random.Next(100);
+
+        //    property.ValueType = Enums.ValueType.BINARY;
+        //    property.Guid = Guid.NewGuid().ToString();
+        //    property.Name = $"Property-{index}-binary";
+
+        //    var countPeriods = Settings.CountOfPeriods;
+        //    property.Periods = new List<IPeriod>();
+        //    for (int i = 0; i < countPeriods; i++)
+        //    {
+        //        var previous = i-1 > -1 ? property.Periods[i-1]: null;
+        //        property.Periods.Add(AddPeriod(i, previous as BinaryPeriod));
+        //    }
+
+
+        //    return property;
+        //}
+
+        //private BinaryPeriod AddPeriod(int index, BinaryPeriod previous)
+        //{
+        //    var period = new BinaryPeriod();
+        //    period.PeriodNumber = index;
+        //    period.PeriodValue = 50 < Random.Next(100);
+
+        //    if(previous != null && previous.PeriodValue == period.PeriodValue)
+        //    {
+        //        period.PeriodValue = !period.PeriodValue;
+        //    }
+
+        //    return period;
+        //}
     }
 }

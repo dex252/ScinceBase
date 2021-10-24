@@ -100,7 +100,6 @@ let config = {
                 loader: 'file-loader',
                 query: {
                     name: '[name].[hash:6].[ext]',
-                    //outputPath: '../../'
                 },
                
             },

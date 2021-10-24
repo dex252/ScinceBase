@@ -21,8 +21,8 @@ namespace Web.Controllers
         [HttpPost]
         public IActionResult SetGeneratorParametres([FromBody] SettingsValues data)
         {
-            GeneratorManager.GenerateNodes(data);
-            return Ok(data);
+            var nodes = GeneratorManager.GenerateNodes(data);
+            return Ok(nodes);
         }
     }
 }
