@@ -51,7 +51,6 @@ namespace Web.Managers
 
         private RootNode AddNode(int index, List<Attribute> properties, string postfix)
         {
-           
             var node = new RootNode();
             node.Name = $"node-{index}-{postfix}";
             node.Guid = Guid.NewGuid().ToString();
@@ -62,7 +61,7 @@ namespace Web.Managers
 
         private Attribute AddProperty(int index)
         {
-            var propertyType = Enums.ValueType.BINARY;
+            var propertyType = Enums.ValueType.INTEGER;
             //var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
             //if (propertyType == Enums.ValueType.ENUMS)
             //{
