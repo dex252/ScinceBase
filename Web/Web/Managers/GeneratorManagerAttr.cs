@@ -63,7 +63,7 @@ namespace Web.Managers
 
         private Attribute AddProperty(int index)
         {
-            var propertyType = Enums.ValueType.BINARY;
+            var propertyType = Enums.ValueType.INTERVAL;
             //var propertyType = (Enums.ValueType)EnumsTypes.GetValue(Random.Next(EnumsTypes.Length));
             //if (propertyType == Enums.ValueType.ENUMS)
             //{

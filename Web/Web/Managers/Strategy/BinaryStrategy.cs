@@ -67,6 +67,7 @@ namespace Web.Managers.Strategy
             var period = new Period();
             period.PeriodNumber = index;
             period.BinaryValue = 50 < Random.Next(100);
+            period.PeriodTime = Random.Next(Settings.NormalPeriodsMin, Settings.NormalPeriodsMax);
 
             if (previous != null && previous.BinaryValue == period.BinaryValue)
             {

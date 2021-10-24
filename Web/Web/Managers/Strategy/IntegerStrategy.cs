@@ -89,6 +89,7 @@ namespace Web.Managers.Strategy
             var period = new Period();
             period.PeriodNumber = index;
             period.NumberValue = Random.Next(Settings.AwailablePropertyMin, Settings.AwailablePropertyMax);
+            period.PeriodTime = Random.Next(Settings.NormalPeriodsMin, Settings.NormalPeriodsMax);
 
             if (previous != null)
             {

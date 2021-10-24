@@ -16,10 +16,6 @@
 
         public int CountOfPeriods { get; set; }
 
-        public int AwailablePeriodsMin { get => NormalPropertyMin; }
-
-        public int AwailablePeriodsMax { get => NormalPropertyMax; }
-
         public int NormalPeriodsMin { get; set; }
 
         public int NormalPeriodsMax { get; set; }
