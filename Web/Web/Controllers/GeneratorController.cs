@@ -27,6 +27,9 @@ namespace Web.Controllers
         {
             var nodes = GeneratorManager.GenerateNodes(data);
             SmartRepository.SaveClasses(nodes);
+#if MOCK
+            BusinessManager.Nodes = nodes;
+#endif
             return Ok(nodes);
         }
     }

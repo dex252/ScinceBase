@@ -22,7 +22,7 @@ namespace Web.Models.Db
         public Interval IntervalValue { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public bool BinaryValue { get; set; }
+        public bool? BinaryValue { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public List<string> EnumValues { get; set; }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Web.Managers;
+using Web.Managers.Strategy;
 using Web.Middlewares;
 using Web.Repositories;
 using Web.Repositories.Connection;
@@ -51,7 +52,7 @@ namespace Web
                     options.JsonSerializerOptions.IgnoreNullValues = true);
 
             services.AddMvc();
-
+            
             services.AddSingleton<IConnection, MySqlDbConnection>();
 
             services.AddTransient<IGenaratorContext, GenaratorContext>();

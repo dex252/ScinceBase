@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Web.Managers;
 using Web.Models.Db;
 using Web.Models.Db.Properties;
 using Web.Repositories;
@@ -194,7 +195,13 @@ namespace Web.Controllers
         public IActionResult Get()
         {
             var result = SmartRepository.GetClasses();
-
+#if MOCK
+            if(BusinessManager.Nodes != null)
+            {
+                result = BusinessManager.Nodes;
+            }
+           
+#endif
             return Ok(result);
         }
 
