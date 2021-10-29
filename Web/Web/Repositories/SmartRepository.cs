@@ -1,5 +1,4 @@
 ﻿using Web.Repositories.Connection;
-using Web.ViewModels.Home;
 using Dapper;
 using System.Collections.Generic;
 using Web.Models.Db;
@@ -64,6 +63,7 @@ namespace Web.Repositories
             using (var connection = Connection.OpenConnection())
             {
                 var result = connection.GetList<EnumsValue>();
+                var a = Newtonsoft.Json.JsonConvert.SerializeObject(result);
                 return result;
             }
         }

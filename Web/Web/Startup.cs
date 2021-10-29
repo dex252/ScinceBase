@@ -57,7 +57,13 @@ namespace Web
             services.AddTransient<IGenaratorContext, GenaratorContext>();
 
             services.AddScoped<IGeneratorManager, GeneratorManagerAttr>();
+
+#if MOCK
+            services.AddScoped<ISmartRepository, MockSmartRepository>();
+#else
             services.AddScoped<ISmartRepository, SmartRepository>();
+#endif
+
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
